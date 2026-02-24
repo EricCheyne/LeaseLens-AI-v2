@@ -29,7 +29,6 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db_user = User(email=user.email, hashed_password=hashed_password, full_name=user.full_name, tenant_id=tenant.id)
     db.add(db_user)
     db.commit()
-    # db.refresh(db_user)
     
     # Create token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)

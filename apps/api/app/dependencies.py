@@ -33,8 +33,8 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     current_tenant_id.set(user.tenant_id)
     return user
 
-def get_current_tenant_id():
-    tenant_id = current_tenant_id.get()
-    if tenant_id is None:
+def get_current_tenant_id(user: User = Depends(get_current_user)):
+    """Returns the current tenant ID from the authenticated user context"""
+    if user.tenant_id is None:
         raise HTTPException(status_code=400, detail="Tenant not set")
-    return tenant_id
+    return user.tenant_id

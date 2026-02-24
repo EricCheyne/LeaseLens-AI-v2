@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, Float
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from .database import Base
@@ -22,3 +22,22 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # tenant = relationship("Tenant")
+
+class Lease(Base):
+    __tablename__ = "leases"
+
+    id = Column(Integer, primary_key=True, index=True)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), index=True)
+    filename = Column(String)
+    original_filename = Column(String)
+    file_path = Column(String)  # MinIO path
+    file_size = Column(Integer)
+    content_type = Column(String)
+    uploaded_by = Column(Integer, ForeignKey("users.id"))
+    status = Column(String, default="uploaded")  # uploaded, processing, processed, error
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    # Relationships
+    tenant = relationship("Tenant")
+    uploader = relationship("User")

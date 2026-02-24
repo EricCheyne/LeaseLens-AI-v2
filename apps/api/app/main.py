@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from .database import engine
 from .models import Base
-from .routers import auth
+from .routers import auth, leases
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -9,6 +9,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="LeaseLensAI API", version="0.1.0")
 
 app.include_router(auth.router)
+app.include_router(leases.router)
 
 @app.get("/healthz")
 def health_check():

@@ -6,11 +6,11 @@ Operational AI for property managers: upload leases, extract key terms, generate
 - **API:** FastAPI (multi-tenant) + background workers
 - **DB:** PostgreSQL + pgvector
 - **Cache/Queue:** Redis
-- **Docs:** S3-compatible storage (MinIO local, S3 in prod)
+- **Storage:** MinIO (S3-compatible local storage, S3 in prod)
 - **AI:** LLM extraction + embeddings (provider-agnostic interface)
 
 High-level flow:
-Client (Next.js) → FastAPI → Postgres/pgvector → Workers → S3
+Client (Next.js) → FastAPI → Postgres/pgvector → Workers → MinIO/S3
 
 ## Local Development
 1. Start infra:
@@ -39,7 +39,7 @@ Copy `.env.example` → `.env` and update values.
 
 ## Roadmap
 - [x] Auth + tenant isolation
-- Lease upload + storage
+- [x] Lease upload + storage
 - AI extraction (terms)
 - Dashboard + filters
 - Payment schedule engine
