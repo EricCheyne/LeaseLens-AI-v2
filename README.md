@@ -18,14 +18,19 @@ Client (Next.js) → FastAPI → Postgres/pgvector → Workers → S3
 2. Run API:
    - `cd apps/api && poetry install`
    - `poetry run uvicorn app.main:app --reload --port 8000`
-3. Check:
-   - `GET http://localhost:8000/healthz`
+3. Run Client:
+   - `cd apps/client && npm install`
+   - `npm run dev`
+4. Check:
+   - API: `GET http://localhost:8000/healthz`
+   - Client: `http://localhost:3000`
 
 ## Environment Variables
 Copy `.env.example` → `.env` and update values.
 
 ## Services
 - API: http://localhost:8000
+- Client: http://localhost:3000
 - Postgres: localhost:5432
 - Redis: localhost:6379
 - MinIO: http://localhost:9000
