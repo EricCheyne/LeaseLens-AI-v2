@@ -23,6 +23,7 @@ Client (Next.js) → FastAPI → Postgres/pgvector → Workers → S3
    - `npm run dev`
 4. Check:
    - API: `GET http://localhost:8000/healthz`
+   - API Docs: `http://localhost:8000/docs`
    - Client: `http://localhost:3000`
 
 ## Environment Variables
@@ -37,7 +38,7 @@ Copy `.env.example` → `.env` and update values.
 - MinIO Console: http://localhost:9001
 
 ## Roadmap
-- Auth + tenant isolation
+- [x] Auth + tenant isolation
 - Lease upload + storage
 - AI extraction (terms)
 - Dashboard + filters
